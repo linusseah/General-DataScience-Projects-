@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<!--
+	Spectral by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>results</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../static/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+	</head>
+	<body>
+
+<!-- style for collapsible button and scrollable table --> 
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+.my-custom-scrollbar {
+position: relative;
+height: 300px;
+overflow: auto;
+}
+
+.my-custom-scrollbar2 {
+position: relative;
+height: 150px;
+overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+display: block;
+}
+
+</style>
+</head>
+<body> 
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+					<article id="main">
+						<header>
+							<h2>Emotional summary</h2>
+						</header>
+
+						<section class="wrapper style5">
+							<div class="inner">
+
+										<button type="button" class="collapsible"><h3>How does this work? (FAQ)</h3></button>
+											<div class="content">
+										<p>
+										<ul>
+										<li> <b>How many emotions are being captured?</b> <br>
+										Text input is analyzed and classified into 8 different emotions: <br>
+										'sadness'&#128546,'anger' &#128545,'fear' &#128543,'worry' 
+										'joy' &#128522, 'love' &#128525,'surprise' &#128558, 'neutral' &#128566
+										</li><br>
+										<li> <b>How does scoring work?</b> <br>
+											Scores lie on a continous range of -1 to 1. (-1 being intensely -ive e.g. 'heartbroken T.T' and 1 being intensely +ive: e.g. 'Ecstatic!! (-:').
+											Each sentence from your original input will be assigned an <b>emotion</b>, and an <b>individual sentiment score</b> based on the intensity of the emotion identified in that sentence.  
+										</li><br>
+										<li> <b>How is the average sentiment score calculated? What can it tell me?</b> <br>
+										Individual sentence scores are aggregated and used to calculate the overall sentiment score for the entire input. A score of 1 means that on balance, ALL sentences in your input are intensely positive and vice versa. 
+										</li><br>
+										<li> <b>My average sentiment score reads '0' or NaN: no emotions detected?</b> <br>
+										Not true. As noted above, total score accounts for the aggregate of scores across all sentences in your text input. A closer reading of how scores have been assigned to individual sentences is required. E.g. an equal number of sentences with positive and negative scores of similar magnitudes could net out to give a total score of '0' but this does not render the text 'emotion-less'.
+										<br> There is a pie chart below the total score that shows you the composition of different detected emotion(s) from the text input. The sentiment line graph to the right of the pie chart also shows you how the sentiment changes from one sentence to another.  
+										</li><br>
+											<li> <b>Why does the breakdown classify a sentence as 'sad' but still assign a positive score ?</b> <br>
+										Ideally this should not happen. The emotion has been classified by a model trained on Natural Langugage Processing / Machine Learning methods while the sentiment score has been assigned based on a lexical rule-based library called VADER. Although the model has been trained on a relatively large dataset, (~0.5MN pre-classified inputs) it is still not well-trained enough to perfectly identify the emotions present all the time. 
+										However, in the event where the classified emotion and the assigned score are clearly mismatched, the score is not taken into account when calculating the overall sentiment score. 
+										</li><br>
+										<li> <b>How are the 'key phrases' and 'key words' chosen?</b> <br>
+										Ideally, 'key phrases' should highlight <b>nouns</b> (objects, characters) and surrounding text to provide snapshot contexts about what the emotions in that sentence are associated with. <br>
+										'Key words' are <b>verbs and adjectives</b> that similarly aim to provide more quick context to a particular sentence. 
+										</li><br>
+
+										</li>
+										</ul>
+										</p>
+											</div>
+										<br>
+										<br>	
+
+								<h3>Input: </h3>
+								<div class="table-wrapper-scroll-y my-custom-scrollbar2">		
+									<blockquote>{{ content }}</blockquote>
+								</div>
+
+								<h3>Average Sentiment Score: {{ score }}</h3>
+
+							  <div style="margin:auto; width:100%"> 
+							<img src="/vader_graph.png" alt="vader sentiment line graph" style="float:right;width:450px; height:300 px;">
+							<img src="/emo_pie.png" alt="emotion pie chart" style="width:450px; height:300">
+							</div>
+
+								<h3>Breakdown:</h3>
+									<div class="table-wrapper-scroll-y my-custom-scrollbar">
+										{% for table in tables %}
+								    	<h2>{{titles[loop.index]}}</h2>						  
+								    	{{ table|safe }}
+								  		{% endfor %}
+							  		</div>
+
+
+							  <!-- <div style="margin:auto; width:100%"> 
+							<img src="/vader_graph.png" alt="vader sentiment line graph" style="float:right;width:450px; height:300 px;">
+							<img src="/emo_pie.png" alt="emotion pie chart" style="width:450px; height:300">
+							</div> -->
+
+							<br>
+							<br>
+							<br>		
+							<div><center>
+								<form action="/">
+									<input type=submit value='Submit another review' class="special">
+								</form>
+							</div></center>
+					</section>
+			<section>
+								
+							<div class="box alt">
+										<div class="row uniform 50%">
+											<div class="12u"><span class="image fit"><img src="../static/images/io.jpg" alt="" /></span></div>
+										</div>
+									</div>		
+				
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<h5><b>A General Assembly Data Science Immersive Capstone Project 2020</b><br>
+							<a href="https://heidicq.github.io//capstone/">Read more about this project on GitHub</a></h5>
+						</div>
+						<ul class="copyright">
+							<li>&copy; Linus Seah - GA DSI 11</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							<li>Thanks to: <a href="https://www.kaggle.com/eray1yildiz/using-lstms-with-attention-for-emotion-recognition/data">Kaggle</a> & <a href="https://www.figure-eight.com/data-for-everyone/">Figure-Eight</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li> 
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+						</ul>
+					</footer>
+
+			</div>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+<!-- Script for the collapsible button --> 
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+
+
+	</body>
+</html>
+
+
+		
+							
+
+

@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Emotional Classification</title>
+	<link rel="stylesheet" href="{{ url_for('static',
+		filename='style.css') }}">
+</head>
+
+<body>
+	<center>
+
+	<h3>Textual Input:</h3>
+
+	<div>{{ content }}</div>
+
+	<h3>Prediction:</h3>
+
+	<div>
+	
+	{% for table in tables %}
+    	<h2>{{titles[loop.index]}}</h2>
+    	{{ table|safe }}
+  	{% endfor %}
+
+  	<br>
+
+	<h3>Average Sentiment Score:</h3>
+
+	<div>{{ score }}</div>
+
+  	<br>
+
+ 	<!-- alt is a description of the image in the event that it does not load -->	
+  	<img src="/emo_pie.png" alt="emotion pie chart"> 
+
+	<!-- plotting the vader line chart  -->
+	<!-- <img src="/vader_graph.png" alt="vader sentiment line graph" align="right"> -->
+  	<img src="/vader_graph.png" alt="vader sentiment line graph" style="float:right ;width:500px; height:500px;"> 
+	
+	<br>
+  	
+	<div id='button'>
+		<form action="/thanks" method="post">
+			<input type=submit value='Correct' name='feedback_button'>
+			<input type=submit value='Incorrect' name='feedback_button'>
+			<input type=hidden value='{{ prediction }}' name='prediction'>
+			<input type=hidden value='{{ content }}' name='review'>
+		</form>
+	</div>
+
+	<br>
+
+	<div id='button'>
+		<form action="/">
+			<input type=submit value='Submit another review'>
+		</form>
+	</div>
+
+</center>
+</body>
+
+</html>
+
