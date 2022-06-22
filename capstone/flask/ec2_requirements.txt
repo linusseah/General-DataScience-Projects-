@@ -1,7 +1,7 @@
 Flask==1.1.1
 gunicorn==19.10.0
 WTForms==2.2.1
-numpy==1.16.6
+numpy==1.22.0
 pandas==0.24.2
 scikit-learn
 cloudpickle==1.2.2
